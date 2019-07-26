@@ -3,7 +3,7 @@ cc_defaults {
     local_include_dirs: ["include/", "lib/"],
     cflags: [
         "-D_FILE_OFFSET_BITS=64",
-        "-DFUSERMOUNT_DIR=\"/data\"",
+        "-DFUSERMOUNT_DIR=\"/system/bin\"",
         "-DFUSE_USE_VERSION=34",
         "-Wall",
         "-Werror",

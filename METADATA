@@ -12,7 +12,7 @@ third_party {
     type: GIT
     value: "https://github.com/libfuse/libfuse.git"
   }
-  version: "3.6.2"
+  version: "fuse-3.6.2"
   last_upgrade_date { year: 2019 month: 7 day: 19 }
   license_type: RESTRICTED_IF_STATICALLY_LINKED
 }
