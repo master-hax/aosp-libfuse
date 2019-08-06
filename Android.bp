@@ -27,7 +27,7 @@ cc_library {
         "libfuse_default_flags",
     ],
 
-    export_include_dirs: ["include"],
+    export_include_dirs: ["include", "lib"],
 
     version_script: "lib/fuse_versionscript",
 
