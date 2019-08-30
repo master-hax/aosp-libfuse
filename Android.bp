@@ -16,6 +16,7 @@ cc_defaults {
     ],
 
     clang: true,
+    sdk_version: "current",
 
     ldflags: [
     ],
