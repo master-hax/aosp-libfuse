@@ -35,6 +35,7 @@ cc_library {
         "lib/buffer.c",
         "lib/cuse_lowlevel.c",
         "lib/fuse.c",
+        "lib/fuse_log.c",
         "lib/fuse_loop.c",
         "lib/fuse_loop_mt.c",
         "lib/fuse_lowlevel.c",
