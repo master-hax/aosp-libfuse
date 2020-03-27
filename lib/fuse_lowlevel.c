@@ -452,7 +452,9 @@ int fuse_reply_readlink(fuse_req_t req, const char *linkname)
 
 int fuse_reply_canonical_path(fuse_req_t req, const char *path)
 {
-	return send_reply_ok(req, path, strlen(path));
+        // The kernel expects a buffer containing the null terminator for this op
+        // So we add the null terminator size to strlen
+	return send_reply_ok(req, path, strlen(path) + 1);
 }
 
 int fuse_reply_open(fuse_req_t req, const struct fuse_file_info *f)
