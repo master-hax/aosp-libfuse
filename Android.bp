@@ -32,6 +32,8 @@ cc_library {
 
     version_script: "lib/fuse_versionscript",
 
+    vendor_available: true,
+
     srcs: [
         "lib/buffer.c",
         "lib/cuse_lowlevel.c",
