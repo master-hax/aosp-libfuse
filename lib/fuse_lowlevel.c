@@ -27,6 +27,7 @@
 #include <errno.h>
 #include <assert.h>
 #include <sys/file.h>
+#include <sys/ioctl.h>
 
 #ifndef F_LINUX_SPECIFIC_BASE
 #define F_LINUX_SPECIFIC_BASE       1024
@@ -388,6 +389,7 @@ static void fill_open(struct fuse_open_out *arg,
 		      const struct fuse_file_info *f)
 {
 	arg->fh = f->fh;
+	arg->passthrough_fh = f->passthrough_fh;
 	if (f->direct_io)
 		arg->open_flags |= FOPEN_DIRECT_IO;
 	if (f->keep_cache)
@@ -455,6 +457,19 @@ int fuse_reply_canonical_path(fuse_req_t req, const char *path)
         // The kernel expects a buffer containing the null terminator for this op
         // So we add the null terminator size to strlen
 	return send_reply_ok(req, path, strlen(path) + 1);
+}
+
+int fuse_passthrough_enable(fuse_req_t req, unsigned int fd) {
+    struct fuse_passthrough_out out = {};
+    int ret;
+
+    out.fd = fd;
+
+    ret = ioctl(req->se->fd, FUSE_DEV_IOC_PASSTHROUGH_OPEN, &out);
+    if (ret <= 0)
+        fuse_log(FUSE_LOG_ERR, "fuse: passthrough_enable: %s\n", strerror(errno));
+
+    return ret;
 }
 
 int fuse_reply_open(fuse_req_t req, const struct fuse_file_info *f)
@@ -1990,6 +2005,8 @@ static void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 				bufsize = max_bufsize;
 			}
 		}
+		if (arg->flags & FUSE_PASSTHROUGH)
+			se->conn.capable |= FUSE_PASSTHROUGH;
 	} else {
 		se->conn.max_readahead = 0;
 	}
@@ -2102,6 +2119,8 @@ static void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 		outarg.flags |= FUSE_WRITEBACK_CACHE;
 	if (se->conn.want & FUSE_CAP_POSIX_ACL)
 		outarg.flags |= FUSE_POSIX_ACL;
+	if (se->conn.want & FUSE_CAP_PASSTHROUGH)
+		outarg.flags |= FUSE_PASSTHROUGH;
 	outarg.max_readahead = se->conn.max_readahead;
 	outarg.max_write = se->conn.max_write;
 	if (se->conn.proto_minor >= 13) {
