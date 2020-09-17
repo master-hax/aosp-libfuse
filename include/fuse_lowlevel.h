@@ -317,6 +317,18 @@ struct fuse_lowlevel_ops {
 	 */
 	void (*readlink) (fuse_req_t req, fuse_ino_t ino);
 
+        /**
+	 * Return canonical path for inotify
+	 *
+	 * Valid replies:
+	 *   fuse_reply_canonical_path
+	 *   fuse_reply_err
+	 *
+	 * @param req request handle
+	 * @param ino the inode number
+	 */
+	void (*canonical_path) (fuse_req_t req, fuse_ino_t ino);
+
 	/**
 	 * Create file node
 	 *
@@ -1336,6 +1348,18 @@ int fuse_reply_attr(fuse_req_t req, const struct stat *attr,
  * @return zero for success, -errno for failure to send reply
  */
 int fuse_reply_readlink(fuse_req_t req, const char *link);
+
+/**
+ * Reply with the canonical path for inotify
+ *
+ * Possible requests:
+ *   canonical_path
+ *
+ * @param req request handle
+ * @param path to canonicalize
+ * @return zero for success, -errno for failure to send reply
+ */
+int fuse_reply_canonical_path(fuse_req_t req, const char *path);
 
 /**
  * Reply with open parameters
