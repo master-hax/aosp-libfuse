@@ -425,6 +425,9 @@ enum fuse_opcode {
 
 	/* CUSE specific operations */
 	CUSE_INIT		= 4096,
+
+        /* Android specific operations */
+        FUSE_CANONICAL_PATH     = 2016,
 };
 
 enum fuse_notify_code {
