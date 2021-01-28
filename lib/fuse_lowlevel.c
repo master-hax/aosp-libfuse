@@ -459,17 +459,67 @@ int fuse_reply_canonical_path(fuse_req_t req, const char *path)
 	return send_reply_ok(req, path, strlen(path) + 1);
 }
 
+enum {
+	FUSE_PASSTHROUGH_API_UNAVAILABLE,
+	FUSE_PASSTHROUGH_API_V0,
+	FUSE_PASSTHROUGH_API_V1,
+	FUSE_PASSTHROUGH_API_STABLE,
+};
+
+/*
+ * Requests the FUSE passthrough feature to be enabled on a specific file
+ * through the passed fd.
+ * This function returns an identifier that must be used as passthrough_fh
+ * when the open/create_open request reply is sent back to /dev/fuse.
+ * As for the current FUSE passthrough implementation, passthrough_fh values
+ * are only valid if > 0, so in case the FUSE passthrough open ioctl returns
+ * a value <= 0, this must be considered an error and is returned as-is by
+ * this function.
+ */
 int fuse_passthrough_enable(fuse_req_t req, unsigned int fd) {
-    struct fuse_passthrough_out out = {};
-    int ret;
+	static sig_atomic_t passthrough_version = FUSE_PASSTHROUGH_API_STABLE;
+	int ret = 0; /* values <= 0 represent errors in FUSE passthrough */
 
-    out.fd = fd;
+	/*
+	 * The interface of FUSE passthrough is still unstable in the kernel,
+	 * so the following solution is to search for the most updated API
+	 * version and, if not found, fall back to an older one.
+	 * This happens when ioctl() returns -1 and errno is set to ENOTTY,
+	 * an error code that corresponds to the lack of a specific ioctl.
+	 */
+	switch (passthrough_version) {
+	case FUSE_PASSTHROUGH_API_STABLE:
+		/* There is not a stable API yet */
+		passthrough_version = FUSE_PASSTHROUGH_API_V1;
+	case FUSE_PASSTHROUGH_API_V1: {
+		struct fuse_passthrough_out_v0 out = {};
+		out.fd = fd;
 
-    ret = ioctl(req->se->fd, FUSE_DEV_IOC_PASSTHROUGH_OPEN, &out);
-    if (ret <= 0)
-        fuse_log(FUSE_LOG_ERR, "fuse: passthrough_enable: %s\n", strerror(errno));
+		ret = ioctl(req->se->fd, FUSE_DEV_IOC_PASSTHROUGH_OPEN_V1, &out);
+		if (ret == -1 && errno == ENOTTY)
+			passthrough_version = FUSE_PASSTHROUGH_API_V0;
+		else
+			break;
+	}
+	case FUSE_PASSTHROUGH_API_V0: {
+		struct fuse_passthrough_out_v0 out = {};
+		out.fd = fd;
 
-    return ret;
+		ret = ioctl(req->se->fd, FUSE_DEV_IOC_PASSTHROUGH_OPEN_V0, &out);
+		if (ret == -1 && errno == ENOTTY)
+			passthrough_version = FUSE_PASSTHROUGH_API_UNAVAILABLE;
+		else
+			break;
+	}
+	default:
+		fuse_log(FUSE_LOG_ERR, "fuse: passthrough_enable no valid API\n");
+		return -ENOTTY;
+	}
+
+	if (ret <= 0)
+		fuse_log(FUSE_LOG_ERR, "fuse: passthrough_enable: %s\n", strerror(errno));
+
+	return ret;
 }
 
 int fuse_reply_open(fuse_req_t req, const struct fuse_file_info *f)
