@@ -463,6 +463,7 @@ enum {
 	FUSE_PASSTHROUGH_API_UNAVAILABLE,
 	FUSE_PASSTHROUGH_API_V0,
 	FUSE_PASSTHROUGH_API_V1,
+	FUSE_PASSTHROUGH_API_V2,
 	FUSE_PASSTHROUGH_API_STABLE,
 };
 
@@ -490,7 +491,14 @@ int fuse_passthrough_enable(fuse_req_t req, unsigned int fd) {
 	switch (passthrough_version) {
 	case FUSE_PASSTHROUGH_API_STABLE:
 		/* There is not a stable API yet */
-		passthrough_version = FUSE_PASSTHROUGH_API_V1;
+		passthrough_version = FUSE_PASSTHROUGH_API_V2;
+	case FUSE_PASSTHROUGH_API_V2: {
+		ret = ioctl(req->se->fd, FUSE_DEV_IOC_PASSTHROUGH_OPEN_V2, &fd);
+		if (ret == -1 && errno == ENOTTY)
+			passthrough_version = FUSE_PASSTHROUGH_API_V1;
+		else
+			break;
+	}
 	case FUSE_PASSTHROUGH_API_V1: {
 		struct fuse_passthrough_out_v0 out = {};
 		out.fd = fd;
