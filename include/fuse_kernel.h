@@ -836,6 +836,7 @@ struct fuse_notify_retrieve_in {
 #define FUSE_DEV_IOC_CLONE	      _IOR(229, 0, uint32_t)
 #define FUSE_DEV_IOC_PASSTHROUGH_OPEN_V0 _IOW(229, 1, struct fuse_passthrough_out_v0)
 #define FUSE_DEV_IOC_PASSTHROUGH_OPEN_V1 _IOW(229, 127, struct fuse_passthrough_out_v0)
+#define FUSE_DEV_IOC_PASSTHROUGH_OPEN_V2 _IOW(229, 126, uint32_t)
 
 struct fuse_lseek_in {
 	uint64_t	fh;
