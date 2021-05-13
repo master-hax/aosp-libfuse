@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e6e21d_c7c72368",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1346941
+      },
+      "writtenOn": "2021-05-13T13:22:19Z",
+      "side": 1,
+      "message": "Where was the previous owners file?",
+      "revId": "205092a90faac9ebbbb6cdb379180322facd398d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
