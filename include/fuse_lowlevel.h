@@ -98,6 +98,10 @@ struct fuse_entry_param {
 	    that come through the kernel, this should be set to a very
 	    large value. */
 	double entry_timeout;
+        uint64_t        backing_action;
+        uint64_t        backing_fd;
+        uint64_t        bpf_action;
+        uint64_t        bpf_fd;
 };
 
 /**
