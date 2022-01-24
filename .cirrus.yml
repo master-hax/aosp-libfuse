@@ -1,0 +1,15 @@
+<<<<<<< HEAD   (819883 Support fuse-bpf am: 7e5a12d6de)
+=======
+# Build libfuse on FreeBSD, but don't run the tests.
+# More work is required to make the tests work.
+task:
+  name: FreeBSD
+  freebsd_instance:
+    image: freebsd-12-1-release-amd64
+  install_script: ASSUME_ALWAYS_YES=yes pkg bootstrap -f; pkg install -y meson ninja
+  script:
+    - mkdir build
+    - cd build
+    - meson ..
+    - ninja
+>>>>>>> BRANCH (d709c2 Released 3.10.5)

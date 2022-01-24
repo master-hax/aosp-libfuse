@@ -1,0 +1,31 @@
+<<<<<<< HEAD   (819883 Support fuse-bpf am: 7e5a12d6de)
+=======
+sudo: required
+dist: bionic
+
+before_install:
+    - curl https://spot.fedorapeople.org/spotfoss-ppa.key | sudo apt-key add -
+    - wget https://launchpad.net/~spotfoss/+archive/ubuntu/ppa/+files/valgrind_3.16.1-2_amd64.deb
+    - sudo apt install ./valgrind_3.16.1-2_amd64.deb
+language:
+    - c
+    - c++
+addons:
+  apt:
+    sources:
+    - sourceline: 'ppa:ubuntu-toolchain-r/test'
+    packages:
+    - doxygen
+    - clang
+    - libstdc++-7-dev 
+    - libstdc++-10-dev
+    - gcc
+    - gcc-7
+    - gcc-10
+    - python3-pip
+    - python3-setuptools
+    - ninja-build
+install: test/travis-install.sh
+script: test/travis-build.sh
+
+>>>>>>> BRANCH (d709c2 Released 3.10.5)

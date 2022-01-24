@@ -145,6 +145,7 @@ FUSE_3.2 {
 	global:
 		fuse_session_loop_mt;
 		fuse_session_loop_mt_31;
+		fuse_session_loop_mt_32;
 		fuse_loop_mt;
 		fuse_loop_mt_31;
 } FUSE_3.1;
@@ -163,9 +164,13 @@ FUSE_3.7 {
 	global:
 		fuse_set_log_func;
 		fuse_log;
+<<<<<<< HEAD   (819883 Support fuse-bpf am: 7e5a12d6de)
 		fuse_passthrough_enable;
 		fuse_reply_canonical_path;
 } FUSE_3.3;
+=======
+} FUSE_3.4;
+>>>>>>> BRANCH (d709c2 Released 3.10.5)
 
 # Local Variables:
 # indent-tabs-mode: t
