@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0566491_667525b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1346941
+      },
+      "writtenOn": "2022-02-14T14:37:30Z",
+      "side": 1,
+      "message": "Are there other projects using libfuse in android that need an update? Curious why this is aosp first?",
+      "revId": "edd8ffb189e25deb5265870ac906cdc20723802c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
