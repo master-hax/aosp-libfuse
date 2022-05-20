@@ -16,6 +16,24 @@
       "message": "Are there other projects using libfuse in android that need an update? Curious why this is aosp first?",
       "revId": "edd8ffb189e25deb5265870ac906cdc20723802c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d8beada_702a1da5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2022-05-20T14:42:07Z",
+      "side": 1,
+      "message": "\u003e Are there other projects using libfuse in android that need an update?\n\nOnly if they use FUSE passthrough.\n\n\u003e Curious why this is aosp first?\n\nWe test the android-mainline kernel with AOSP images, and currently passthrough is disabled because of the conflicting flag.",
+      "parentUuid": "b0566491_667525b2",
+      "revId": "edd8ffb189e25deb5265870ac906cdc20723802c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
