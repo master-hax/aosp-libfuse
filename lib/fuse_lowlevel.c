@@ -2013,6 +2013,7 @@ void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 	struct fuse_session *se = req->se;
 	size_t bufsize = se->bufsize;
 	size_t outargsize = sizeof(outarg);
+	int extended_flags;
 
 	(void) nodeid;
 	if (se->debug) {
@@ -2031,6 +2032,10 @@ void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 	memset(&outarg, 0, sizeof(outarg));
 	outarg.major = FUSE_KERNEL_VERSION;
 	outarg.minor = FUSE_KERNEL_MINOR_VERSION;
+
+	extended_flags = arg->major > 7 || (arg->major == 7 && arg->minor >= 36);
+	fuse_log(FUSE_LOG_DEBUG, "fuse: protocol version: %u.%u, extended flags: %d\n",
+		arg->major, arg->minor, extended_flags);
 
 	if (arg->major < 7) {
 		fuse_log(FUSE_LOG_ERR, "fuse: unsupported protocol version: %u.%u\n",
@@ -2092,8 +2097,13 @@ void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 				bufsize = max_bufsize;
 			}
 		}
-		if (arg->flags & FUSE_PASSTHROUGH)
-			se->conn.capable |= FUSE_PASSTHROUGH;
+		if (extended_flags) {
+			if (arg->flags2 & (1 << 31))
+				se->conn.capable |= FUSE_CAP_PASSTHROUGH;
+		} else {
+			if (arg->flags & (1 << 31))
+				se->conn.capable |= FUSE_CAP_PASSTHROUGH;
+		}
 	} else {
 		se->conn.max_readahead = 0;
 	}
@@ -2206,8 +2216,12 @@ void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 		outarg.flags |= FUSE_WRITEBACK_CACHE;
 	if (se->conn.want & FUSE_CAP_POSIX_ACL)
 		outarg.flags |= FUSE_POSIX_ACL;
-	if (se->conn.want & FUSE_CAP_PASSTHROUGH)
-		outarg.flags |= FUSE_PASSTHROUGH;
+	if (se->conn.want & FUSE_CAP_PASSTHROUGH) {
+		if (extended_flags)
+			outarg.flags2 |= (1 << 31);
+		else
+			outarg.flags |= (1 << 31);
+	}
 	if (se->conn.want & FUSE_CAP_CACHE_SYMLINKS)
 		outarg.flags |= FUSE_CACHE_SYMLINKS;
 	if (se->conn.want & FUSE_CAP_EXPLICIT_INVAL_DATA)
