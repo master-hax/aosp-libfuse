@@ -409,7 +409,7 @@ struct fuse_loop_config {
  *
  * This feature is disabled by default.
  */
-#define FUSE_CAP_PASSTHROUGH            (1 << 31)
+#define FUSE_CAP_PASSTHROUGH            (1LL << 63)
 
 /**
  * Ioctl flags
@@ -473,7 +473,7 @@ struct fuse_conn_info {
 	/**
 	 * Capability flags that the kernel supports (read-only)
 	 */
-	unsigned capable;
+	uint64_t capable;
 
 	/**
 	 * Capability flags that the filesystem wants to enable.
@@ -481,7 +481,7 @@ struct fuse_conn_info {
 	 * libfuse attempts to initialize this field with
 	 * reasonable default values before calling the init() handler.
 	 */
-	unsigned want;
+	uint64_t want;
 
 	/**
 	 * Maximum number of pending "background" requests. A
