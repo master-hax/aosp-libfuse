@@ -421,6 +421,7 @@ int fuse_reply_entry(fuse_req_t req, const struct fuse_entry_param* e) {
     if (!e->ino && req->se->conn.proto_minor < 4) return fuse_reply_err(req, ENOENT);
 
     memset(&arg, 0, sizeof(arg));
+    fill_entry(&arg, e);
 
     if (extended_args) {
         memset(&bpf_arg, 0, sizeof(bpf_arg));
@@ -435,7 +436,6 @@ int fuse_reply_entry(fuse_req_t req, const struct fuse_entry_param* e) {
 
         return send_reply_ok(req, &arg_ext, size);
     } else {
-        fill_entry(&arg, e);
         return send_reply_ok(req, &arg, size);
     }
 }
