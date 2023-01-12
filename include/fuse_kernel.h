@@ -716,6 +716,12 @@ struct fuse_read_in {
 	uint32_t	padding;
 };
 
+struct fuse_read_out {
+	uint64_t offset;
+	uint32_t size;
+	uint32_t again;
+};
+
 struct fuse_passthrough_out_v0 {
 	uint32_t	fd;
 	/* For future implementation */
@@ -903,7 +909,7 @@ struct fuse_in_header {
 	uint32_t	uid;
 	uint32_t	gid;
 	uint32_t	pid;
-	uint32_t	padding;
+	uint32_t	error_in;
 };
 
 struct fuse_out_header {
