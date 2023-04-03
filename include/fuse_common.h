@@ -399,6 +399,9 @@ struct fuse_loop_config {
  */
 #define FUSE_CAP_EXPLICIT_INVAL_DATA    (1 << 25)
 
+
+#define FUSE_CAP_SETXATTR_EXT    (1 << 27)
+
 /**
  * Indicates support for passthrough mode access for read/write operations.
  *
