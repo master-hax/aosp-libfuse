@@ -2089,6 +2089,9 @@ void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 			se->conn.capable |= FUSE_CAP_NO_OPENDIR_SUPPORT;
 		if (arg->flags & FUSE_EXPLICIT_INVAL_DATA)
 			se->conn.capable |= FUSE_CAP_EXPLICIT_INVAL_DATA;
+		if (arg->flags & FUSE_SETXATTR_EXT)
+			se->conn.capable |= FUSE_CAP_SETXATTR_EXT;
+
 		if (!(arg->flags & FUSE_MAX_PAGES)) {
 			size_t max_bufsize =
 				FUSE_DEFAULT_MAX_PAGES_PER_REQ * getpagesize()
@@ -2136,6 +2139,7 @@ void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 	LL_SET_DEFAULT(1, FUSE_CAP_ASYNC_DIO);
 	LL_SET_DEFAULT(1, FUSE_CAP_IOCTL_DIR);
 	LL_SET_DEFAULT(1, FUSE_CAP_ATOMIC_O_TRUNC);
+	LL_SET_DEFAULT(1, FUSE_CAP_SETXATTR_EXT);
 	LL_SET_DEFAULT(se->op.write_buf, FUSE_CAP_SPLICE_READ);
 	LL_SET_DEFAULT(se->op.getlk && se->op.setlk,
 		       FUSE_CAP_POSIX_LOCKS);
@@ -2226,6 +2230,8 @@ void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 		outarg.flags |= FUSE_CACHE_SYMLINKS;
 	if (se->conn.want & FUSE_CAP_EXPLICIT_INVAL_DATA)
 		outarg.flags |= FUSE_EXPLICIT_INVAL_DATA;
+	if (se->conn.want & FUSE_CAP_SETXATTR_EXT)
+		outarg.flags |= FUSE_SETXATTR_EXT;
 	outarg.max_readahead = se->conn.max_readahead;
 	outarg.max_write = se->conn.max_write;
 	if (se->conn.proto_minor >= 13) {
