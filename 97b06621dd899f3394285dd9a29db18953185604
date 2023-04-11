@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46bf52d3_6890d8fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2023-04-11T09:51:20Z",
+      "side": 1,
+      "message": "Hi, thanks for the patch! I\u0027m happy with this patch, but although I don\u0027t see issues with possible future merge conflicts, I\u0027d like to see this merged in the official libfuse repository in github, so that I can smoothly cherry-pick the change without diverging the codebase. I can help you with that if you want.",
+      "revId": "97b06621dd899f3394285dd9a29db18953185604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
