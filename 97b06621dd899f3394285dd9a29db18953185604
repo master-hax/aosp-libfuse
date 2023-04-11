@@ -16,6 +16,24 @@
       "message": "Hi, thanks for the patch! I\u0027m happy with this patch, but although I don\u0027t see issues with possible future merge conflicts, I\u0027d like to see this merged in the official libfuse repository in github, so that I can smoothly cherry-pick the change without diverging the codebase. I can help you with that if you want.",
       "revId": "97b06621dd899f3394285dd9a29db18953185604",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9b80c6_5739f75a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889050
+      },
+      "writtenOn": "2023-04-11T11:56:26Z",
+      "side": 1,
+      "message": "OK, you can cherry-pick the change.\nThanks",
+      "parentUuid": "46bf52d3_6890d8fe",
+      "revId": "97b06621dd899f3394285dd9a29db18953185604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
