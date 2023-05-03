@@ -70,6 +70,24 @@
       "parentUuid": "aa72586b_88ccdc9a",
       "revId": "97b06621dd899f3394285dd9a29db18953185604",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea8a34a_780e61c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2023-05-03T09:21:07Z",
+      "side": 1,
+      "message": "Hi, this is not the original patch.\n\nI\u0027m not comfortable with enabling SETXATTR_EXT by default with:\n\n```\nLL_SET_DEFAULT(1, FUSE_CAP_SETXATTR_EXT);\n```\n\nThe FUSE daemon should decide if this functionality is acceptable or not.\nLet\u0027s discuss offline to better understand why you need this.",
+      "parentUuid": "ead6293d_76ee06ee",
+      "revId": "97b06621dd899f3394285dd9a29db18953185604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
