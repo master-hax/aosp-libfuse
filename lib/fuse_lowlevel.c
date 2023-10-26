@@ -2276,6 +2276,13 @@ void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 		outarg.flags |= FUSE_EXPLICIT_INVAL_DATA;
 	if (se->conn.want & FUSE_CAP_SETXATTR_EXT)
 		outarg.flags |= FUSE_SETXATTR_EXT;
+
+	if (extended_flags) {
+		if (arg->flags & FUSE_INIT_EXT) {
+			outarg.flags |= FUSE_INIT_EXT;
+		}
+	}
+
 	outarg.max_readahead = se->conn.max_readahead;
 	outarg.max_write = se->conn.max_write;
 	if (se->conn.proto_minor >= 13) {
