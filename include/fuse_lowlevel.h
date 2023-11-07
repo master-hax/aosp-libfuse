@@ -102,6 +102,7 @@ struct fuse_entry_param {
         uint64_t        backing_fd;
         uint64_t        bpf_action;
         uint64_t        bpf_fd;
+        uint64_t        cred_action;
 };
 
 /**

@@ -591,11 +591,15 @@ struct fuse_entry_out {
 #define FUSE_ACTION_REMOVE      1
 #define FUSE_ACTION_REPLACE     2
 
+#define FUSE_OVERRIDE_CREDENTIALS	1
+#define FUSE_USE_USER_CREDENTIALS	2
+
 struct fuse_entry_bpf_out {
         uint64_t        backing_action;
         uint64_t        backing_fd;
         uint64_t        bpf_action;
         uint64_t        bpf_fd;
+        uint64_t        cred_action;
 };
 
 struct fuse_forget_in {

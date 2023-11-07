@@ -430,6 +430,7 @@ int fuse_reply_entry(fuse_req_t req, const struct fuse_entry_param* e) {
         bpf_arg.bpf_fd = e->bpf_fd;
         bpf_arg.backing_action = e->backing_action;
         bpf_arg.backing_fd = e->backing_fd;
+        bpf_arg.cred_action = e->cred_action;
 
         arg_ext.arg = arg;
         arg_ext.bpf_arg = bpf_arg;
