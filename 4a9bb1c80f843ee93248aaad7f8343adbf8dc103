@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "585ec6a3_afc93f21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2023-12-01T11:10:35Z",
+      "side": 1,
+      "message": "Cherry-picking tool failed to create a CL. I\u0027ll create a new one manually later.",
+      "revId": "4a9bb1c80f843ee93248aaad7f8343adbf8dc103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
