@@ -16,6 +16,24 @@
       "message": "How was this working before this change?",
       "revId": "12e33976165cf63909151222566ee36b974eef9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7049b1ea_e17ffe99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2024-01-02T17:53:07Z",
+      "side": 1,
+      "message": "I think we can be confident it wasn\u0027t ;)\n\nThe specific failure is relatively benign within the Android ecosystem - we are unable to display a large number of sub-folders in the /storage/emulated/0/Android/data folder, which is generally not something an app should be doing.",
+      "parentUuid": "665e35c0_0c714da5",
+      "revId": "12e33976165cf63909151222566ee36b974eef9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
