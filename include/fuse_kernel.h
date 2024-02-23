@@ -718,8 +718,8 @@ struct fuse_read_in {
 
 struct fuse_read_out {
 	uint64_t offset;
-	uint32_t size;
 	uint32_t again;
+	uint32_t padding;
 };
 
 struct fuse_passthrough_out_v0 {
