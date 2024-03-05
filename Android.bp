@@ -102,4 +102,7 @@ cc_library {
         "//apex_available:platform",
         "com.android.mediaprovider",
     ],
+
+    // Workaround LTO build breakage.
+    lto_O0: true,
 }
