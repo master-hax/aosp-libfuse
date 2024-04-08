@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27979ebf_a25578ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2024-04-08T12:21:58Z",
+      "side": 1,
+      "message": "I\u0027m kind of OK with this, although the parent change would be enough.",
+      "revId": "b8adf7a034b71ccffa7226754ca8dfdc7e4ce7b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
