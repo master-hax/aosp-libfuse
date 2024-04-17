@@ -16,6 +16,23 @@
       "message": "ping for OWNERS...",
       "revId": "3516c1c35a819a0d3bbdcf3906888c2310916b50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cafc724a_f2c3747c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-04-17T15:42:45Z",
+      "side": 1,
+      "message": "ping for OWNERS...",
+      "revId": "3516c1c35a819a0d3bbdcf3906888c2310916b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
